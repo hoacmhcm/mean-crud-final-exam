@@ -4,9 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
+
 var cors = require('cors');
 
+var employee = require('./routes/employee');
+
+var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/employee', { useMongoClient: true })
@@ -14,9 +17,7 @@ mongoose.connect('mongodb://localhost:27017/employee', { useMongoClient: true })
   .catch((err) => console.error(err));
 
 
-// var index = require('./routes/index');
-// var users = require('./routes/users');
-var employee = require('./routes/employee');
+
 
 var app = express();
 
@@ -33,8 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-// app.use('/', index);
-// app.use('/users', users);
+
 app.use('/employees', employee);
 
 // catch 404 and forward to error handler
