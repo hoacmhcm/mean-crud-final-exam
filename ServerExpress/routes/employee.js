@@ -3,6 +3,7 @@ var router = express.Router();
 var employee = require('../models/employee');
 
 
+//Get all employee
 router.get('/', function (req, res, next) {
     employee.find(function (err, data) {
         if (err) return next(err);
@@ -10,7 +11,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
-//
+//Get employee by id
 router.get('/:id', function (req, res, next) {
     employee.findById(req.params.id, function (err, data) {
         if (err) return next(err);
@@ -18,6 +19,7 @@ router.get('/:id', function (req, res, next) {
     });
 })
 
+//Add new employee
 router.post('/', function (req, res, next) {
     employee.create(req.body, function (err, data) {
         if (err) return next(err);
@@ -25,6 +27,7 @@ router.post('/', function (req, res, next) {
     });
 });
 
+//update employee
 router.put('/:id', function (req, res, next) {
     employee.findByIdAndUpdate(req.params.id, req.body, function (err, data) {
         if (err) return next(err);
@@ -32,13 +35,12 @@ router.put('/:id', function (req, res, next) {
     });
 });
 
+//delete employee
 router.delete('/:id', function (req, res, next) {
     employee.findByIdAndRemove(req.params.id, function (err, data) {
         if (err) return next(err);
         res.json(data);
     });
 });
-
-
 
 module.exports = router;
